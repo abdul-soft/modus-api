@@ -14,3 +14,12 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->get('vehicles/{modelYear}/{manufacturer}/{model}', [
+    'as' => 'vehicles', 'uses' => 'VehiclesController@getVehicles'
+]);
+
+$router->post('vehicles', [
+    'as' => 'showVehicles', 'uses' => 'VehiclesController@postVehicles'
+]);
