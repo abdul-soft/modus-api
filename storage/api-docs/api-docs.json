@@ -1,0 +1,137 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Modus Vehicles Api",
+        "description": "In modus vehicle api you can check vehicles by the year, manufacturer and model. api has two endponts to get a list of vehicles.",
+        "version": "0.1"
+    },
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/vehicles/{modelYear}/{manufacturer}/{model}": {
+            "get": {
+                "tags": [
+                    "vehicles"
+                ],
+                "summary": "Get List of Vehicles by Get Request",
+                "description": "Get a list of vehicles by model year, manufacturer and model",
+                "operationId": "vehicles",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "modelYear",
+                        "in": "path",
+                        "description": "Model Year of a vehicle",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "manufacturer",
+                        "in": "path",
+                        "description": "Manufacturer of a vehicle",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "model",
+                        "in": "path",
+                        "description": "Model of a vehicle",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "withRating",
+                        "in": "query",
+                        "description": "to get rating of vehicle set this param to true",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VehiclesResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/vehicles": {
+            "post": {
+                "tags": [
+                    "vehicles"
+                ],
+                "summary": "Get List of Vehicles by post Request",
+                "description": "Get a list of vehicles by model year, manufacturer and model",
+                "operationId": "showVehicles",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "modelYear": {
+                                    "description": "Model Year of a vehicle",
+                                    "type": "string"
+                                },
+                                "manufacturer": {
+                                    "description": "Manufacturer of a vehicle",
+                                    "type": "string"
+                                },
+                                "model": {
+                                    "description": "Model of a vehicle",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VehiclesResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "VehiclesResponse": {
+            "properties": {
+                "Count": {
+                    "description": "number of records of vehicles",
+                    "type": "integer"
+                },
+                "Results": {
+                    "description": "List of Vehicles",
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "Description": {
+                                "type": "string"
+                            },
+                            "VehicleId": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
